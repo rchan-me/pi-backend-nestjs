@@ -1,6 +1,6 @@
 FROM node:18.16.1-bookworm-slim As development
 
-RUN apt-get update && apt-get install -y procps
+RUN apt-get update && apt-get install -y procps openssl
 
 USER node
 WORKDIR /usr/src/app

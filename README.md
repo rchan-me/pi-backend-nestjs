@@ -16,3 +16,7 @@
 ### TODO
 
 1. Create a separate Dockerfile for building production images
+
+### Design decisions
+
+* For `PUT /users/:userId ` endpoint, the correct definition is to modify the whole resources. However, since Prisma is already managing some metadata resources (such as updated timestamp or record ID), I do not allow end users to modify such resources

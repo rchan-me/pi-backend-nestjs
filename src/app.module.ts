@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import appConfig from './config/app.config';
 import prismaConfig from './config/prisma.config';
+import { UsersModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import prismaConfig from './config/prisma.config';
       envFilePath: ['.env'],
       expandVariables: true,
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
