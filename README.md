@@ -3,8 +3,16 @@
 ### Setup
 
 1. run `yarn install` to install dependencies
-3. create a copy of `.env.example` and rename it to `.env`
+2. create a copy of `.env.example` and rename it to `.env`
     ```sh
       cp .env.example .env
     ```
-4. run `docker compose up --build` to build its Docker image and start this app at `http://localhost:4000`
+3. run `docker compose up --build` to build its Docker image and start this app at `http://localhost:4000`
+4. update value for `DATABASE_HOST` in `.env` to be `localhost` prior to the next step
+    1. this is due to Postgres itself getting exposed through Docker's network interface via port 5432, but its service name `postgres` does not, so it is unreachable via its direct service name
+5. run `yarn db:migrate` to apply any pending migration(s)
+    1. must always run this command the first time around, in order to initialize table(s)
+
+### TODO
+
+1. Create a separate Dockerfile for building production images
