@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { User } from '@prisma/client';
+import { User, Prisma } from '@prisma/client';
 import { UserData } from './user.type';
 
 @Injectable()
@@ -32,8 +32,9 @@ export class UserService {
   }
 
   async findMatchingUsersByName(pattern: string): Promise<User[]> {
-    return this.prisma.user.findMany({
-      where: { name: { contains: pattern } },
-    });
+    const findManyArgs: Prisma.UserFindManyArgs = pattern === '*' ? {} : {
+      where: { name: { contains: pattern } }
+    }
+    return this.prisma.user.findMany(findManyArgs);
   }
 }
