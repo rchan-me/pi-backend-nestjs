@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
 import { UserData } from './user.type';
@@ -8,6 +8,16 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async createUser(data: UserData): Promise<User> {
+    if (!data.name || !data.email) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          message: 'Invalid payload',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.prisma.user.create({
       data,
     });
@@ -20,6 +30,16 @@ export class UserService {
   }
 
   async updateUser(userId: string, data: UserData): Promise<User> {
+    if (!data.name || !data.email) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          message: 'Invalid payload',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.prisma.user.update({
       data,
       where: { id: userId },
