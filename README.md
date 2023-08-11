@@ -16,6 +16,7 @@
 ### TODO
 
 1. Create a separate Dockerfile for building production images
+2. Add more test scenarios, both unit and integration tests
 
 ### Design decisions
 
