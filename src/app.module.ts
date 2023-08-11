@@ -11,10 +11,7 @@ import { UsersModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [
-        appConfig,
-        prismaConfig,
-      ],
+      load: [appConfig, prismaConfig],
       envFilePath: ['.env'],
       expandVariables: true,
     }),
