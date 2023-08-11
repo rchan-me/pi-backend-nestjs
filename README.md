@@ -12,10 +12,12 @@
     1. this is due to Postgres itself getting exposed through Docker's network interface via port 5432, but its service name `postgres` does not, so it is unreachable via its direct service name
 5. run `yarn db:migrate` to apply any pending migration(s)
     1. must always run this command the first time around, in order to initialize table(s)
+6. run `yarn test:cov` to run all unit and integration tests, along with generating the coverage report at the end
 
 ### TODO
 
 1. Create a separate Dockerfile for building production images
+2. Add more test scenarios, both unit and integration tests
 
 ### Design decisions
 
