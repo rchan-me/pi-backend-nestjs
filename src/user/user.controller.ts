@@ -7,7 +7,7 @@ import { UserData } from './user.type';
 @Controller({
   path: 'users',
 })
-export class UsersController {
+export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('new')
