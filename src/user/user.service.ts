@@ -13,18 +13,13 @@ export class UserService {
     });
   }
 
-  async findUserById(
-    userId: string
-  ): Promise<User | null> {
+  async findUserById(userId: string): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: { id: userId },
     });
   }
 
-  async updateUser(
-    userId: string,
-    data: UserData
-  ): Promise<User> {
+  async updateUser(userId: string, data: UserData): Promise<User> {
     return this.prisma.user.update({
       data,
       where: { id: userId },
@@ -32,9 +27,12 @@ export class UserService {
   }
 
   async findMatchingUsersByName(pattern: string): Promise<User[]> {
-    const findManyArgs: Prisma.UserFindManyArgs = pattern === '*' ? {} : {
-      where: { name: { contains: pattern } }
-    }
+    const findManyArgs: Prisma.UserFindManyArgs =
+      pattern === '*'
+        ? {}
+        : {
+            where: { name: { contains: pattern } },
+          };
     return this.prisma.user.findMany(findManyArgs);
   }
 }

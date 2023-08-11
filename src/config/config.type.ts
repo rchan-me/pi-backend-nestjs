@@ -4,4 +4,4 @@ export type PrismaConfig = {
 
 export type AppConfig = {
   port: number;
-}
+};

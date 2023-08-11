@@ -11,10 +11,8 @@ export class UsersController {
   constructor(private readonly userService: UserService) {}
 
   @Post('new')
-  async createUser(
-    @Body() userData: UserData,
-  ): Promise<User> {
-    return this.userService.createUser(userData)
+  async createUser(@Body() userData: UserData): Promise<User> {
+    return this.userService.createUser(userData);
   }
 
   @Get(':userId')
@@ -23,7 +21,10 @@ export class UsersController {
   }
 
   @Put(':userId')
-  async updateUser(@Param('userId') userId: string, @Body() userData: UserData,): Promise<User> {
+  async updateUser(
+    @Param('userId') userId: string,
+    @Body() userData: UserData,
+  ): Promise<User> {
     return this.userService.updateUser(userId, userData);
   }
 
