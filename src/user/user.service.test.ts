@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@prisma/client';
 import { Test } from '@nestjs/testing';
 import { UserData } from './user.type';
+import { HttpException } from '@nestjs/common';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -67,7 +68,7 @@ describe('UserService', () => {
     it('throws an error due to bad data', () => {
       createMock.mockImplementation((data) => {
         if (!data.name || !data.email) {
-          throw new Error('missing required args');
+          throw new Error();
         }
       });
 
@@ -75,7 +76,7 @@ describe('UserService', () => {
 
       return expect(async () => {
         await userService.createUser(payload);
-      }).rejects.toThrow(new Error('missing required args'));
+      }).rejects.toBeInstanceOf(HttpException);
     });
   });
 
@@ -151,7 +152,7 @@ describe('UserService', () => {
       const mockValidId = 'deadbeef-dead-beef-dead-123412341234';
       updateMock.mockImplementation((args) => {
         if (args.where.id !== mockValidId) {
-          throw new Error('record not found');
+          throw new Error();
         }
       });
 
@@ -160,7 +161,7 @@ describe('UserService', () => {
 
       return expect(async () => {
         await userService.updateUser(mockUserId, payload);
-      }).rejects.toThrow(new Error('record not found'));
+      }).rejects.toBeInstanceOf(HttpException);
     });
   });
 
