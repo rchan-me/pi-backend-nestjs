@@ -20,6 +20,7 @@
 2. Add more test scenarios, both unit and integration tests
 3. Secure endpoints with JWT authentication (passportjs module supports this)
 4. Fix hot reloading for NestJS app when it's running inside docker compose
+5. Create exception filters for handling errors NestJS style
 
 ### Design decisions
 
